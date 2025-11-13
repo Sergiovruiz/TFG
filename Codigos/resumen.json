@@ -1,0 +1,20 @@
+{
+  "documento": {
+    "titulo": "Replication Types: Towards a Shared Taxonomy",
+    "autor": "Maria Teresa Baldassarre, Jeffrey Carver, Oscar Dieste, Natalia Juristo",
+    "fecha": "2013",
+    "resumen_general": "El documento propone una taxonomía para unificar el lenguaje y el entendimiento de las repeticiones experimentales en la ingeniería del software. Se encuestaron a investigadores empíricos y se discutió en una reunión de 2013. La propuesta tiene un alto nivel de acuerdo entre los participantes y se ve como el primer paso hacia un lenguaje consistente en este campo.",
+    "apartados": [
+      {
+        "titulo": "INTRODUCTION",
+        "contenido": "Se explica la importancia de repetir experimentos para producir conocimiento generalizable y se define lo que se considera una repición. Se menciona que el interés por las repeticiones en la comunidad de ingeniería del software ha aumentado recientemente.",
+        "palabras_clave": [
+          "replicaciones",
+          "ingeniería del software",
+          "taxonomías",
+          "encuestas"
+        ]
+      }
+    ]
+  }
+}
