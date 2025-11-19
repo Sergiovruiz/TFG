@@ -1,0 +1,6 @@
+[MODELOS]
+F:\TFG1\text-generation-webui-3.13\user_data\models\Qwen2.5-VL-7B-Instruct-Q8_0.gguf
+
+[DOCUMENTOS]
+F:\Git\TFG\PDFs\long-paper.pdf
+C:\ruta\a\segundo_documento.pdf
