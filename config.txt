@@ -2,13 +2,16 @@
 F:\TFG1\text-generation-webui-3.13\user_data\models\Qwen2.5-VL-7B-Instruct-Q8_0.gguf
 
 [DOCUMENTOS]
-F:\Git\TFG\PDFs\short-paper.pdf
-F:\Git\TFG\PDFs\long-paper.pdf
+short-paper.pdf
 
 [TEMPERATURA]
 0.6
+0.7
 
-[PROMPT]
-Eres un asistente que analiza documentos en español y devuelve exclusivamente un JSON con una estructura fija.
-(NOTA: el texto puede ocupar varias líneas)
+[PROMPTS]
+Eres un asistente que analiza documentos académicos y devuelve un JSON
+resumiendo su contenido.
+FIN_PROMPT
+
+Eres un asistente que analiza documentos academicos y que devuelve un JSON que contienelos autores del documento.
 FIN_PROMPT
