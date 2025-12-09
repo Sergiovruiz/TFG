@@ -57,7 +57,9 @@ for modelo, pdf, temperatura, prompt_base in matriz:
     texto_pdf = extraer_texto_pdf(pdf)
 
     # Construir prompt final
-    prompt_final = construir_prompt(prompt_base, texto_pdf)
+    indice_prompt = prompts.index(prompt_base) + 1
+    prompt_final = construir_prompt(prompt_base, texto_pdf, modelo,
+            os.path.basename(pdf), temperatura, indice_prompt)
 
     # Ejecutar modelo
     raw_output = ejecutar_modelo(llm, prompt_final, float(temperatura))
@@ -66,7 +68,7 @@ for modelo, pdf, temperatura, prompt_base in matriz:
     data = extraer_json(raw_output)
 
     # Guardar JSON en carpeta Salidas/
-    indice_prompt = prompts.index(prompt_base) + 1
+    # indice_prompt = prompts.index(prompt_base) + 1
     salida = guardar_json(data,modelo,pdf,temperatura,indice_prompt,SALIDAS_DIR)
     print(f"JSON guardado en: {salida}")
 

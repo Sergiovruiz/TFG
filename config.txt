@@ -6,7 +6,6 @@ short-paper.pdf
 
 [TEMPERATURA]
 0.6
-0.7
 
 [PROMPTS]
 Eres un asistente que analiza documentos académicos y devuelve un JSON
