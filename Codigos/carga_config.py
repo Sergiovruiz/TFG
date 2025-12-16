@@ -5,12 +5,13 @@ def leer_configuracion(ruta_config):
     modelos = []
     documentos = []
     temperaturas = []
-    prompts = []
-
+    prompts = [] 
+    repeticiones = 1
+    
     seccion = None
     prompt_buffer = []
 
-    # 1. Verificar archivo
+    # Verificar archivo
     if not os.path.exists(ruta_config):
         raise FileNotFoundError(f"ERROR: No existe el archivo de configuración:\n{ruta_config}")
 
@@ -27,7 +28,7 @@ def leer_configuracion(ruta_config):
                 nombre_seccion = linea[1:-1].lower()
 
                 # Aceptar PROMPT o PROMPTS
-                if nombre_seccion in ("modelos", "documentos", "temperatura", "prompts"):
+                if nombre_seccion in ("modelos", "documentos", "temperatura", "prompts","repeticiones"):
                     seccion = nombre_seccion
                 else:
                     raise ValueError(f"ERROR:Sección desconocida {linea}")
@@ -63,6 +64,10 @@ def leer_configuracion(ruta_config):
                 except ValueError:
                     raise ValueError(f"ERROR: Temperatura inválida en línea {num_linea}: '{linea}'")
                 continue
+            
+            if seccion == "repeticiones":
+                repeticiones = int(linea)
+                continue
 
             # Si llega aquí, hay un error
             raise ValueError(f"ERROR: Línea fuera de sección válida → '{linea}'")
@@ -83,4 +88,4 @@ def leer_configuracion(ruta_config):
     if not prompts:
         raise ValueError("ERROR: No se definió ningún prompt en [PROMPTS]")
 
-    return modelos, documentos, temperaturas, prompts
+    return modelos, documentos, temperaturas, prompts, repeticiones

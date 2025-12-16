@@ -40,14 +40,33 @@ Asistente:
 """
 
 def guardar_json(data, modelo, pdf, temperatura, prompt_id, carpeta_salida):
+
     nombre_modelo = os.path.basename(modelo).replace(".gguf", "")
     nombre_pdf = os.path.basename(pdf).replace(".pdf", "")
 
-    nombre_archivo = f"resumen_{nombre_modelo}_{nombre_pdf}_T{temperatura}_P{prompt_id}.json"
+    nombre_base = f"resumen_{nombre_modelo}_{nombre_pdf}_T{temperatura}_P{prompt_id}"
+    extension = ".json"
 
-    ruta_completa = os.path.join(carpeta_salida, nombre_archivo)
+    # Ruta inicial (sin versión)
+    ruta = os.path.join(carpeta_salida, nombre_base + extension)
 
-    with open(ruta_completa, "w", encoding="utf-8") as f:
+    # Si no existe, se guarda directamente
+    if not os.path.exists(ruta):
+        ruta_final = ruta
+    else:
+        # Buscar siguiente versión disponible
+        version = 1
+        while True:
+            nombre_versionado = f"{nombre_base}_v{version}{extension}"
+            ruta_versionada = os.path.join(carpeta_salida, nombre_versionado)
+
+            if not os.path.exists(ruta_versionada):
+                ruta_final = ruta_versionada
+                break
+
+            version += 1
+    # Guardar archivo
+    with open(ruta_final, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-    return ruta_completa
+    return ruta_final

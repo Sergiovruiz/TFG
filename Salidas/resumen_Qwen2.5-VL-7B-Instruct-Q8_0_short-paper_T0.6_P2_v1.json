@@ -1,0 +1,16 @@
+{
+  "metadata": {
+    "modelo": "F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf",
+    "documento": "short-paper.pdf",
+    "temperatura": 0.6,
+    "prompt_id": 2
+  },
+  "analisis": {
+    "autores": [
+      "Maria Teresa Baldassarre",
+      "Jeffrey Carver",
+      "Oscar Dieste",
+      "Natalia Juristo"
+    ]
+  }
+}

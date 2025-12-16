@@ -1,0 +1,11 @@
+{
+  "metadata": {
+    "modelo": "F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf",
+    "documento": "short-paper.pdf",
+    "temperatura": 0.6,
+    "prompt_id": 1
+  },
+  "analisis": {
+    "resumen": "El documento es un estudio académico sobre la importancia de los repeticiones experimentales en el contexto de la ingeniería de software. Se propone una taxonomía que agrupa y define los tipos de repeticiones, buscando una terminología común y consistente. Los resultados indican que esta taxonomía fue bien recibida por los participantes del taller. El estudio concluye que es crucial la uniformidad en la terminología para el progreso de la investigación y que aún se requiere más estudio y discusión para lograr una terminología compartida."
+  }
+}

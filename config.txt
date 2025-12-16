@@ -14,3 +14,6 @@ FIN_PROMPT
 
 Eres un asistente que analiza documentos academicos y que devuelve un JSON que contienelos autores del documento.
 FIN_PROMPT
+
+[REPETICIONES]
+1
