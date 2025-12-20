@@ -1,42 +1,63 @@
-import json
 import os
+import json
+import csv
 
-def construir_prompt(prompt_base, texto_pdf, modelo, pdf, temperatura, prompt_id):
+def construir_prompt(texto_pdf, modelo, pdf, temperatura, prompt_id):
     return f"""
-INSTRUCCIONES IMPORTANTES — LÉELAS CON ATENCIÓN:
+You are a scientific reviewer specialized in experimental software engineering.
 
-Debes generar *únicamente un JSON válido*, sin texto añadido, sin explicaciones, sin formato Markdown,
-y sin repetir el contenido varias veces.
+IMPORTANT INSTRUCTIONS (MUST FOLLOW):
+- Respond ONLY with a single, valid JSON object.
+- Do NOT include explanations, markdown, comments, or extra text.
+- Do NOT repeat the JSON.
+- Do NOT wrap the output in ```json blocks.
 
-El JSON final debe tener esta estructura EXACTA:
+The JSON output MUST follow EXACTLY this structure:
 
 {{
   "metadata": {{
     "modelo": "{modelo}",
     "documento": "{pdf}",
     "temperatura": {temperatura},
-    "prompt_id": {prompt_id}
+    "prompt_id": "{prompt_id}"
   }},
-  "analisis": {{
-      // Aquí debes generar el contenido solicitado por el prompt base
+  "review": {{
+    "Q1.1": {{
+      "answer": "Yes|No|N/A",
+      "justification": "..."
+    }},
+    "...": {{}},
+    "Q10": {{
+      "answer": "Yes|No|N/A",
+      "justification": "..."
+    }}
   }}
 }}
 
-REGLAS ESTRICTAS:
-- No escribas bloques ```json ni etiquetas Markdown.
-- No generes más de un JSON. Solo uno.
-- No repitas el JSON. No incluyas versiones múltiples.
-- No incluyas comentarios dentro del JSON final (usa solo texto).
-- No generes texto fuera del JSON.
-- Sustituye el contenido de "analisis" por el resultado del prompt que viene a continuación.
+Your task:
+Evaluate the following scientific article using the checklist below.
+For EACH question (Q1.1 to Q10):
+- "answer" MUST be exactly one of: "Yes", "No", or "N/A"
+- "justification" MUST be concise (maximum 2 sentences) and based ONLY on the article text.
 
---- PROMPT DEL USUARIO ---
-{prompt_base}
+Checklist:
+Q1.1 Are null hypotheses explicitly defined?
+Q1.2 Are alternative hypotheses explicitly defined?
+Q2 Has the required sample size been calculated?
+Q3 Have subjects been randomly selected?
+Q4 Have subjects been randomly assigned to treatments?
+Q5 Have test assumptions (normality, heteroskedasticity) been checked or discussed?
+Q6 Has the definition of linear models been discussed?
+Q7 Have the analysis results been interpreted using statistical concepts (p-values, confidence intervals, power)?
+Q8 Do researchers avoid calculating and discussing post hoc power?
+Q9 Is multiple testing (e.g., Bonferroni correction) reported?
+Q10 Are descriptive statistics (means, counts) reported?
 
---- TEXTO A ANALIZAR ---
-\"\"\"{texto_pdf[:4000]}\"\"\"
+Article text to evaluate:
 
-Asistente:
+\"\"\"{texto_pdf[:3000]}\"\"\"
+
+Respond ONLY with the JSON object described above.
 """
 
 def guardar_json(data, modelo, pdf, temperatura, prompt_id, carpeta_salida):
@@ -47,7 +68,7 @@ def guardar_json(data, modelo, pdf, temperatura, prompt_id, carpeta_salida):
     nombre_base = f"resumen_{nombre_modelo}_{nombre_pdf}_T{temperatura}_P{prompt_id}"
     extension = ".json"
 
-    # Ruta inicial (sin versión)
+    # Ruta inicial
     ruta = os.path.join(carpeta_salida, nombre_base + extension)
 
     # Si no existe, se guarda directamente
@@ -70,3 +91,28 @@ def guardar_json(data, modelo, pdf, temperatura, prompt_id, carpeta_salida):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
     return ruta_final
+
+def escribir_en_csv(ruta_csv, metadata, review):
+    filas = []
+
+    with open(ruta_csv, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for fila in reader:
+            filas.append(fila)
+
+    for fila in filas:
+        if (fila["modelo"] == metadata["modelo"]
+            and fila["documento"] == metadata["documento"]
+            and float(fila["temperatura"]) == float(metadata["temperatura"])
+            and int(fila["prompt_id"]) == int(metadata["prompt_id"])):
+            pregunta = fila["pregunta"]
+
+            if pregunta in review:
+                fila["respuesta"] = review[pregunta]["answer"]
+                fila["justificacion"] = review[pregunta]["justification"]
+
+    # Reescribir CSV
+    with open(ruta_csv, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=filas[0].keys())
+        writer.writeheader()
+        writer.writerows(filas)

@@ -6,7 +6,7 @@ from Codigos.procesado_pdf import extraer_texto_pdf
 from Codigos.carga_modelo import cargar_modelo, ejecutar_modelo, extraer_json
 # from Codigos.database import conectar_mongo, guardar_resultado
 from Codigos.grid import crear_matriz, crear_csv
-from Codigos.utils import construir_prompt, guardar_json
+from Codigos.utils import construir_prompt, guardar_json, escribir_en_csv
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -55,7 +55,10 @@ print("Total ejecuciones reales:", len(matriz) * repeticiones)
 # Ejecución global
 for modelo, pdf, temperatura, prompt_base in matriz:
 
-    indice_prompt = prompts.index(prompt_base) + 1
+    if prompt_base == "DEFAULT":
+        indice_prompt = "Default"
+    else:
+        indice_prompt = prompts.index(prompt_base) + 1
 
     print(f"\n➡ Combinación:")
     print(f"   Modelo: {modelo}")
@@ -72,15 +75,13 @@ for modelo, pdf, temperatura, prompt_base in matriz:
     for rep in range(1, repeticiones + 1):
         print(f"   Repetición {rep}/{repeticiones}")
 
-        # Construir prompt
+        # Construir prompt, default si se esta ejecutando el prompt por defecto
         prompt_final = construir_prompt(
-            prompt_base,
-            texto_pdf,
-            modelo,
-            os.path.basename(pdf),
-            temperatura,
-            indice_prompt
-        )
+                        texto_pdf,
+                        modelo,
+                        os.path.basename(pdf),
+                        temperatura,
+                        indice_prompt)
 
         # Ejecutar modelo
         raw_output = ejecutar_modelo(llm, prompt_final, float(temperatura))
@@ -90,13 +91,18 @@ for modelo, pdf, temperatura, prompt_base in matriz:
 
         # Guardar JSON (versionado automático)
         salida = guardar_json(
-            data,
-            modelo,
-            pdf,
-            temperatura,
-            indice_prompt,
-            SALIDAS_DIR
-        )
-        print(f"      JSON guardado en: {salida}")
+                    data,
+                    modelo,
+                    pdf,
+                    temperatura,
+                    indice_prompt,
+                    SALIDAS_DIR)
+
+        print(f"JSON guardado en: {salida}")
+
+        metadata = data["metadata"]
+        review = data["review"]
+
+    escribir_en_csv(CSV_PATH, metadata, review)
         
 print("\nPROCESO COMPLETADO")

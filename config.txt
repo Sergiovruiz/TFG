@@ -2,18 +2,12 @@
 F:\TFG1\text-generation-webui-3.13\user_data\models\Qwen2.5-VL-7B-Instruct-Q8_0.gguf
 
 [DOCUMENTOS]
-short-paper.pdf
+EX18_No PAIN, No Gain.pdf
 
 [TEMPERATURA]
 0.6
 
 [PROMPTS]
-Eres un asistente que analiza documentos académicos y devuelve un JSON
-resumiendo su contenido.
-FIN_PROMPT
-
-Eres un asistente que analiza documentos academicos y que devuelve un JSON que contienelos autores del documento.
-FIN_PROMPT
 
 [REPETICIONES]
 1

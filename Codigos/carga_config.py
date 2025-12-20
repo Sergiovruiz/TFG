@@ -34,7 +34,7 @@ def leer_configuracion(ruta_config):
                     raise ValueError(f"ERROR:Sección desconocida {linea}")
                 continue
 
-            # Manejo de final de prompts
+            # Detección de final de prompts
             if linea == "FIN_PROMPT":
                 if not prompt_buffer:
                     raise ValueError(f"ERROR en línea {num_linea}: FIN_PROMPT sin contenido previo")
@@ -72,7 +72,7 @@ def leer_configuracion(ruta_config):
             # Si llega aquí, hay un error
             raise ValueError(f"ERROR: Línea fuera de sección válida → '{linea}'")
 
-    # Validaciones finales
+    # Comprobaciones de error
     if prompt_buffer:
         raise ValueError("ERROR: Un prompt no fue cerrado con FIN_PROMPT")
 
@@ -85,7 +85,10 @@ def leer_configuracion(ruta_config):
     if not temperaturas:
         raise ValueError("ERROR: No se definió ninguna temperatura en [TEMPERATURA]")
 
+    # PROMPT POR DEFECTO
     if not prompts:
-        raise ValueError("ERROR: No se definió ningún prompt en [PROMPTS]")
-
+        prompts = ["DEFAULT"]
+        
+    # if not prompts:
+    #     raise ValueError("ERROR: No se definió ningún prompt en [PROMPTS]")
     return modelos, documentos, temperaturas, prompts, repeticiones

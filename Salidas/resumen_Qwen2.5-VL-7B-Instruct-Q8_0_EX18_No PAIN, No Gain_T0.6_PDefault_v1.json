@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "modelo": "F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf",
+    "documento": "EX18_No PAIN, No Gain.pdf",
+    "temperatura": 0.6,
+    "prompt_id": "Default"
+  },
+  "review": {
+    "Q1.1": {
+      "answer": "N/A",
+      "justification": "The text does not discuss null or alternative hypotheses."
+    },
+    "Q1.2": {
+      "answer": "N/A",
+      "justification": "The text does not discuss null or alternative hypotheses."
+    },
+    "Q2": {
+      "answer": "N/A",
+      "justification": "The text does not mention sample size."
+    },
+    "Q3": {
+      "answer": "N/A",
+      "justification": "The text does not mention random selection of subjects."
+    },
+    "Q4": {
+      "answer": "N/A",
+      "justification": "The text does not mention random assignment of subjects."
+    },
+    "Q5": {
+      "answer": "N/A",
+      "justification": "The text does not discuss test assumptions."
+    },
+    "Q6": {
+      "answer": "N/A",
+      "justification": "The text does not discuss the definition of linear models."
+    },
+    "Q7": {
+      "answer": "N/A",
+      "justification": "The text does not interpret analysis results using statistical concepts."
+    },
+    "Q8": {
+      "answer": "N/A",
+      "justification": "The text does not mention post hoc power calculations."
+    },
+    "Q9": {
+      "answer": "N/A",
+      "justification": "The text does not report multiple testing corrections."
+    },
+    "Q10": {
+      "answer": "N/A",
+      "justification": "The text does not report descriptive statistics."
+    }
+  }
+}
