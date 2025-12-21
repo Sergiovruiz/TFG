@@ -92,24 +92,29 @@ def guardar_json(data, modelo, pdf, temperatura, prompt_id, carpeta_salida):
 
     return ruta_final
 
-def escribir_en_csv(ruta_csv, metadata, review):
+def escribir_en_csv(ruta_csv, metadata, review, repeticion):
     filas = []
 
     with open(ruta_csv, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for fila in reader:
             filas.append(fila)
+            
+    # Comprobacion de CSV vacío
+    if not filas:
+        return
 
     for fila in filas:
         if (fila["modelo"] == metadata["modelo"]
-            and fila["documento"] == metadata["documento"]
+            and os.path.basename(fila["documento"]) == metadata["documento"]
             and float(fila["temperatura"]) == float(metadata["temperatura"])
-            and int(fila["prompt_id"]) == int(metadata["prompt_id"])):
+            and fila["prompt_id"] == str(metadata["prompt_id"])
+            and int(fila["repeticion"]) == int(repeticion)):
             pregunta = fila["pregunta"]
 
             if pregunta in review:
-                fila["respuesta"] = review[pregunta]["answer"]
-                fila["justificacion"] = review[pregunta]["justification"]
+                fila["respuesta"] = review[pregunta].get("answer", "")
+                fila["justificacion"] = review[pregunta].get("justification", "")
 
     # Reescribir CSV
     with open(ruta_csv, "w", newline="", encoding="utf-8") as f:

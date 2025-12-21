@@ -33,14 +33,7 @@ print("Prompts detectados:", len(prompts))
 print("Repeticiones:", repeticiones)
 
 #Creacion de csv de resultados
-crear_csv(
-    modelos=modelos,
-    documentos=documentos,
-    temperaturas=temperaturas,
-    prompts=prompts,
-    repeticiones=repeticiones,
-    ruta_csv=CSV_PATH
-)
+crear_csv(modelos, documentos, temperaturas, prompts, repeticiones, CSV_PATH)
 
 # Conectar a MongoDB
 # coleccion = conectar_mongo()
@@ -76,12 +69,7 @@ for modelo, pdf, temperatura, prompt_base in matriz:
         print(f"   Repetición {rep}/{repeticiones}")
 
         # Construir prompt, default si se esta ejecutando el prompt por defecto
-        prompt_final = construir_prompt(
-                        texto_pdf,
-                        modelo,
-                        os.path.basename(pdf),
-                        temperatura,
-                        indice_prompt)
+        prompt_final = construir_prompt(texto_pdf, modelo, os.path.basename(pdf), temperatura, indice_prompt)
 
         # Ejecutar modelo
         raw_output = ejecutar_modelo(llm, prompt_final, float(temperatura))
@@ -90,19 +78,13 @@ for modelo, pdf, temperatura, prompt_base in matriz:
         data = extraer_json(raw_output)
 
         # Guardar JSON (versionado automático)
-        salida = guardar_json(
-                    data,
-                    modelo,
-                    pdf,
-                    temperatura,
-                    indice_prompt,
-                    SALIDAS_DIR)
+        salida = guardar_json(data, modelo, pdf, temperatura, indice_prompt, SALIDAS_DIR)
 
         print(f"JSON guardado en: {salida}")
 
         metadata = data["metadata"]
         review = data["review"]
 
-    escribir_en_csv(CSV_PATH, metadata, review)
+    escribir_en_csv(CSV_PATH, metadata, review, rep)
         
 print("\nPROCESO COMPLETADO")

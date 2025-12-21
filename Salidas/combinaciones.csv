@@ -1,2 +1,12 @@
-modelo,documento,temperatura,prompt_id,repeticion,resultado
-F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,1,1,
+modelo,documento,temperatura,prompt_id,repeticion,pregunta,respuesta,justificacion
+F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,Default,1,Q1.1,N/A,The text does not discuss null or alternative hypotheses.
+F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,Default,1,Q1.2,N/A,The text does not discuss null or alternative hypotheses.
+F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,Default,1,Q2,N/A,The text does not mention sample size.
+F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,Default,1,Q3,N/A,The text does not mention random selection of subjects.
+F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,Default,1,Q4,N/A,The text does not mention random assignment of subjects.
+F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,Default,1,Q5,N/A,The text does not discuss test assumptions.
+F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,Default,1,Q6,N/A,The text does not discuss the definition of linear models.
+F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,Default,1,Q7,N/A,The text does not interpret analysis results using statistical concepts.
+F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,Default,1,Q8,N/A,The text does not mention post hoc power calculations.
+F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,Default,1,Q9,N/A,The text does not report multiple testing corrections.
+F:/TFG1/text-generation-webui-3.13/user_data/models/Qwen2.5-VL-7B-Instruct-Q8_0.gguf,"f:\Git\TFG\pdfs\EX18_No PAIN, No Gain.pdf",0.6,Default,1,Q10,N/A,The text does not report descriptive statistics.
